@@ -8,15 +8,13 @@ public class Storage {
     private static Storage storage;
     private List<String> data;
 
-    public static Storage get(Context context) {
+    public static Storage get() {
         if(storage == null) {
-            storage = new Storage(context);
+            storage = new Storage();
         }
         return storage;
     }
-    private Storage(Context context) {
-
-    }
+    private Storage() {}
 
     public List<String> getData() {
         return data;

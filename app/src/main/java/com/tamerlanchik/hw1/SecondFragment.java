@@ -32,17 +32,8 @@ public class SecondFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState != null && savedInstanceState.containsKey(KEY_TEXT)) {
-            mValue = savedInstanceState.getString(KEY_TEXT);
-        } else {
-            mValue = getArguments().getString(KEY_TEXT);
-        }
-
-        if(savedInstanceState != null && savedInstanceState.containsKey(KEY_COLOR)) {
-            mColor = savedInstanceState.getInt(KEY_COLOR);
-        } else {
-            mColor = getArguments().getInt(KEY_COLOR);
-        }
+        mValue = getArguments().getString(KEY_TEXT);
+        mColor = getArguments().getInt(KEY_COLOR);
     }
 
     @Nullable
@@ -55,12 +46,5 @@ public class SecondFragment extends Fragment {
         mTextView.setText(mValue);
 
         return v;
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(KEY_TEXT, mValue);
-        outState.putInt(KEY_COLOR, mColor);
     }
 }
