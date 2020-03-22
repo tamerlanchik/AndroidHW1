@@ -45,15 +45,15 @@ public class FirstFragment extends Fragment {
         mAddElement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Storage storage = Storage.get(getActivity());
+                Storage storage = Storage.get();
                 int len = storage.getData().size();
-                int val = Integer.valueOf(storage.getData().get(len-1)) + 1;
+                int val = Integer.valueOf(storage.getData().get(len-1)) + getResources().getInteger(R.integer.list_step);
                 storage.getData().add(Integer.toString(val));
                 mAdapter.notifyItemChanged(len);
             }
         });
 
-        mAdapter = new GridAdapter(Storage.get(getActivity()).getData());
+        mAdapter = new GridAdapter(Storage.get().getData());
         mRecycleView.setAdapter(mAdapter);
 
         return v;
@@ -65,11 +65,11 @@ public class FirstFragment extends Fragment {
         if(savedInstanceState == null) {
             savedInstanceState = new Bundle();
         }
-        if(Storage.get(getActivity()).getData() == null) {
+        if(Storage.get().getData() == null) {
             int from = getResources().getInteger(R.integer.list_from);
             int to = savedInstanceState.getInt(KEY_LAST_VALUE, getResources().getInteger(R.integer.list_to));
             int step = getResources().getInteger(R.integer.list_step);
-            Storage.get(getActivity())
+            Storage.get()
                     .setData(generateList(from, to, step));
         }
     }
@@ -102,7 +102,7 @@ public class FirstFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(KEY_LAST_VALUE, Integer.parseInt(Storage.get(getActivity()).getLast()));
+        outState.putInt(KEY_LAST_VALUE, Integer.parseInt(Storage.get().getLast()));
     }
 
     private class GridHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
